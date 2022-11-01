@@ -5,6 +5,18 @@ import { User } from '@prisma/client';
 export class UserController {
   constructor(private userService: UserService) {}
 
+  @Get('/test/solution/single')
+  async getSolutionSingle(): Promise<
+    User | { error: boolean; message: string }
+  > {
+    return await this.userService.solutionSingle();
+  }
+  @Get('/test/solution/multiple')
+  async getSolutionMultiple(): Promise<
+    User[] | { error: boolean; message: string }
+  > {
+    return await this.userService.solutionMultiple();
+  }
   @Get('/:id')
   async getUser(@Param('id') id: string): Promise<User | null> {
     return await this.userService.user({ id: Number(id) });
